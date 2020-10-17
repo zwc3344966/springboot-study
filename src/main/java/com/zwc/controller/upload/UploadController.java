@@ -17,10 +17,12 @@ import java.util.List;
  **/
 
 @RestController
-public class uploadController {
+public class UploadController {
 
     @RequestMapping("upload")
-    public String uploadFile(String params, @RequestParam(name = "file", required = false) MultipartFile[] file) {
+    public String uploadFile(String params, @RequestParam(name = "file", required = false) MultipartFile[] file) throws IOException {
+        BufferedOutputStream out = null;
+        MultipartFile multipartFile = null;
         System.out.println("======接收报文：\n" + params);
         System.out.println("======文件数：\n" + file.length);
         if (file.length > 0) {
@@ -31,25 +33,17 @@ public class uploadController {
                  * 这里只是简单一个例子,请自行参考，融入到实际中可能需要大家自己做一些思考，比如： 1、文件路径； 2、文件名；
                  * 3、文件格式; 4、文件大小的限制;
                  */
-                BufferedOutputStream out = null;
-                try {
-                    // 数组转List
-                    List<MultipartFile> mf = Arrays.asList(file);
-                    for (int i = 0; i < mf.size(); i++) {
-                        MultipartFile multipartFile = mf.get(i);
+                // 数组转List
+                List<MultipartFile> mf = Arrays.asList(file);
+                for (int i = 0; i < mf.size(); i++) {
+                    multipartFile = mf.get(i);
+                    if (!multipartFile.isEmpty()) {
                         System.out.println("fileName = [" + multipartFile.getOriginalFilename() + "]");
                         out = new BufferedOutputStream(
                                 new FileOutputStream(new File(
                                         multipartFile.getOriginalFilename())));
                         out.write(multipartFile.getBytes());
                         out.flush();
-                    }
-                } catch (Exception e) {
-                    System.out.println("IO异常：" + e.getMessage());
-                    throw e;
-                } finally {
-                    if (null != out) {
-                        out.close();
                     }
                 }
             } catch (FileNotFoundException e) {
@@ -58,6 +52,10 @@ public class uploadController {
             } catch (IOException e) {
                 e.printStackTrace();
                 return "上传失败," + e.getMessage();
+            } finally {
+                if (null != out) {
+                    out.close();
+                }
             }
 
         } else {

@@ -1,0 +1,4 @@
+# 可以通过配置debug: true来查看那些自动配置类生效了，哪些没生效
+debug: true
+server:
+  port: 8080

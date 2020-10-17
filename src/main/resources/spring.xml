@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--配置自动扫描的包,使其自动注入到IOC容器-->
+    <context:component-scan base-package="com.zwc">
+        <!--<context:exclude-filter > : exclude-filter设置不扫描controller-->
+<!--        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+    </context:component-scan>
+
+    <!--<bean id="registerDaoRef" class="com.zwc.dao.impl.RegisterDaoImpl"></bean>
+    <bean id="register" class="com.zwc.service.impl.RegisterServiceImpl">
+        <property name="registerDao" ref="registerDaoRef"></property>
+    </bean>
+
+    <bean id="async" class="com.zwc.controller.SpringbootTest" />-->
+</beans>

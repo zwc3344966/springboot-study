@@ -13,7 +13,7 @@ import java.util.Map;
  * @author: zhangwch
  * @create: 2020-10-17 00:31
  **/
-public class uploadTest {
+public class UploadTest {
     // 可以设置为Https,如：private static HttpsURLConnection conn = null;
     private static HttpURLConnection conn = null;
     private static InputStream in = null;

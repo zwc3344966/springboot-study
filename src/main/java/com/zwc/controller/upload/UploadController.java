@@ -22,7 +22,6 @@ public class UploadController {
     @RequestMapping("upload")
     public String uploadFile(String params, @RequestParam(name = "file", required = false) MultipartFile[] file) throws IOException {
         BufferedOutputStream out = null;
-        MultipartFile multipartFile = null;
         System.out.println("======接收报文：\n" + params);
         System.out.println("======文件数：\n" + file.length);
         if (file.length > 0) {
@@ -34,9 +33,22 @@ public class UploadController {
                  * 3、文件格式; 4、文件大小的限制;
                  */
                 // 数组转List
-                List<MultipartFile> mf = Arrays.asList(file);
-                for (int i = 0; i < mf.size(); i++) {
-                    multipartFile = mf.get(i);
+//                List<MultipartFile> mf = Arrays.asList(file);
+//                MultipartFile multipartFile = null;
+//                for (int i = 0; i < mf.size(); i++) {
+//                    multipartFile = mf.get(i);
+//                    if (!multipartFile.isEmpty()) {
+//                        System.out.println("fileName = [" + multipartFile.getOriginalFilename() + "]");
+//                        out = new BufferedOutputStream(
+//                                new FileOutputStream(new File(
+//                                        multipartFile.getOriginalFilename())));
+//                        out.write(multipartFile.getBytes());
+//                        out.flush();
+//                    }
+//                }
+
+                for (int i = 0; i < file.length; i++) {
+                    MultipartFile multipartFile = file[i];
                     if (!multipartFile.isEmpty()) {
                         System.out.println("fileName = [" + multipartFile.getOriginalFilename() + "]");
                         out = new BufferedOutputStream(

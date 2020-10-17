@@ -35,7 +35,9 @@ public class UploadTest {
 //        fileMap.put("2", "116.pdf");
 //        fileMap.put("3", "b21f95a9eeecbba7a6693e83caed31c.jpg");
 //        fileMap.put("4", "ydd001报文.txt");
-        sends(body, fileMap, url, new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888)));
+//        需开启代理
+//        sends(body, fileMap, url, new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888)));
+        sends(body, fileMap, url, null);
         receives();
     }
 

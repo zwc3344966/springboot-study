@@ -5,9 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author: zhangwch
@@ -30,18 +28,18 @@ public class UploadTest {
                 "    }\n" +
                 "}";
 
-        Map<String, String> fileMap = new HashMap();
-        fileMap.put("1", "155.pdf");
-//        fileMap.put("2", "116.pdf");
-//        fileMap.put("3", "b21f95a9eeecbba7a6693e83caed31c.jpg");
-//        fileMap.put("4", "ydd001报文.txt");
+        List<String> fileList = new ArrayList<>();
+        fileList.add("155.pdf");
+//        fileList.add("116.pdf");
+//        fileList.add("b21f95a9eeecbba7a6693e83caed31c.jpg");
+//        fileList.add("ydd001报文.txt");
 //        需开启代理
 //        sends(body, fileMap, url, new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888)));
-        sends(body, fileMap, url, null);
+        sends(body, fileList, url, null);
         receives();
     }
 
-    public static void sends(String body, Map<String, String> fileMap, String urlString, Proxy proxy) throws Exception {
+    public static void sends(String body,List<String> fileList, String urlString, Proxy proxy) throws Exception {
         OutputStream out = null;
         try {
             // 构造URL
@@ -76,12 +74,13 @@ public class UploadTest {
                 out.write(sd.toString().getBytes());
             }
 
-            Iterator<Map.Entry<String, String>> iterator = fileMap.entrySet().iterator();
-            while (iterator.hasNext()) {
+            for (int i = 0; i < fileList.size(); i++) {
                 StringBuilder fileSd = new StringBuilder();
-                Map.Entry<String, String> next = iterator.next();
-                String fileName = next.getValue();
+                String fileName = fileList.get(i);
                 fileSd.append(twoHyphens + boundary + end);
+                /**
+                 * name = "file" : file需与服务端接收参数对应，否则会报错
+                 */
                 fileSd.append(String.format("Content-Disposition: form-data; name=\"file\"; filename=\"%s\"",
                         fileName) + end + end);
                 out.write(fileSd.toString().getBytes());

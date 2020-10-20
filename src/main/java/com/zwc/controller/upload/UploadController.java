@@ -1,15 +1,11 @@
 package com.zwc.controller.upload;
 
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author: zhangwch
@@ -19,6 +15,13 @@ import java.util.List;
 @RestController
 public class UploadController {
 
+    /**
+     * 多个文件上传处理（保存路径为当前项目下）
+     *
+     * @param params
+     * @param file
+     * @return
+     */
     @RequestMapping("upload")
     public String uploadFile(String params, @RequestParam(name = "file", required = false) MultipartFile[] file) throws IOException {
         BufferedOutputStream out = null;
@@ -26,12 +29,6 @@ public class UploadController {
         System.out.println("======文件数：\n" + file.length);
         if (file.length > 0) {
             try {
-                /*
-                 * 这段代码执行完毕之后，图片上传到了工程的跟路径； 大家自己扩散下思维，如果我们想把图片上传到
-                 * d:/files大家是否能实现呢？ 等等;
-                 * 这里只是简单一个例子,请自行参考，融入到实际中可能需要大家自己做一些思考，比如： 1、文件路径； 2、文件名；
-                 * 3、文件格式; 4、文件大小的限制;
-                 */
                 // 数组转List
 //                List<MultipartFile> mf = Arrays.asList(file);
 //                MultipartFile multipartFile = null;
@@ -76,9 +73,16 @@ public class UploadController {
         return "上传成功";
     }
 
+    /**
+     * 单个文件上传处理（保存路径为当前项目下）
+     *
+     * @param params
+     * @param file
+     * @return
+     */
     @RequestMapping("upload1")
     // required = false ：设置非必输
-    public String uploadFile1(String params, @RequestParam(name = "file", required = false) MultipartFile file) {
+    public String uploadFile(String params, @RequestParam(name = "file", required = false) MultipartFile file) {
         if (!params.isEmpty()) {
             System.out.println("======接收报文：\n" + params);
         } else {

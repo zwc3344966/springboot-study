@@ -29,12 +29,12 @@ public class UploadTest {
                 "}";
 
         List<String> fileList = new ArrayList<>();
-        fileList.add("155.pdf");
-//        fileList.add("116.pdf");
+//        fileList.add("155.pdf");
+        fileList.add("116.pdf");
 //        fileList.add("b21f95a9eeecbba7a6693e83caed31c.jpg");
 //        fileList.add("ydd001报文.txt");
 //        需开启代理
-//        sends(body, fileMap, url, new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888)));
+//        sends(body, fileList, url, new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888)));
         sends(body, fileList, url, null);
         receives();
     }
@@ -101,7 +101,6 @@ public class UploadTest {
                     throw e;
                 }
             }
-
         }
     }
 

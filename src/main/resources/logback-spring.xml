@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!-- 自定义pattern -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%green(%d{yyyy-MM-dd HH:mm:ss.SSS}) | %red([%-5level]) | %cyan(%logger - %msg%n)"></property>
+
+    <!--控制台日志 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            &lt;!&ndash;表示匹配该级别及以上&ndash;&gt;
+            <onMatch>ACCEPT</onMatch>
+            &lt;!&ndash;表示不匹配该级别以下的&ndash;&gt;
+            <onMismatch>DENY</onMismatch>
+        </filter>-->
+        <encoder>
+            <pattern>
+                <!--日志输出格式-->
+                <!--%green(%d{yyyy-MM-dd HH:mm:ss.SSS}) %red([%-5level]) %cyan(%logger - %msg%n)-->
+                ${CONSOLE_LOG_PATTERN}
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- INFO级别日志,记录INFO级别及比INFO更高级别的日志-->
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                <!--日志引文件路径-->
+                ${user.dir}\logs\%d{yyyy-MM-dd}\info.log
+            </fileNamePattern>
+            <!-- 日志保存15天，超过15天自动删除 -->
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                <!--日志输出格式-->
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] %logger - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- ERROR级别日志,只记录Error级别日志 -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 过滤器,只记录ERROR级别的日志,如果日志级别等于配置级别，过滤器会根据onMath 和 onMismatch接收或拒绝日志 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                <!--日志文件路径-->
+                ${user.dir}\logs\%d{yyyy-MM-dd}\error.log
+            </fileNamePattern>
+            <!-- 日志保存15天，超过15天自动删除 -->
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                <!--日志输出格式-->
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] %logger - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+<!--    <logger name = "com.zwc" level = "ERROR" />-->
+
+    <root level = "INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="INFO"/>
+        <appender-ref ref="ERROR"/>
+    </root>
+</configuration>

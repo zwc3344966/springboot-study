@@ -1,6 +1,9 @@
 package com.zwc.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,11 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("hello")
 public class Hello {
 
-    @RequestMapping("hello")
-    public String hello() {
-        System.out.println("===进入hello方法===");
-        System.out.println("===进入hello方法===");
+    private final Logger logger = LoggerFactory.getLogger(Hello.class);
 
+    @RequestMapping(value = "hello", method = RequestMethod.POST)
+    public String hello() {
+        String method = "hello";
+        logger.info("进入{}方法", method);
+        logger.error("{}方法处理中", method);
+        logger.debug("{}方法结束", method);
         return "hello";
     }
 }

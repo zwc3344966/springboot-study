@@ -2,3 +2,11 @@
 debug: true
 server:
   port: 8080
+
+# 去掉项目启动时，打印大量的CONDITIONS EVALUATION REPORT日志
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: INFO

@@ -30,15 +30,16 @@ public class DownloadController {
         ServletOutputStream outputStream = null;
         File file = null;
         try {
-            String filePath = System.getProperty("user.dir") + "\\" + "1111.txt";
+//            String filePath = System.getProperty("user.dir") + "\\" + "1111.txt";
+            String filePath = System.getProperty("user.dir") + "\\" + "be92cf16-4f6e-44d8-82f3-0a2e9ddd6b55.png";
             System.out.println("filePath = [" + filePath + "]");
             file = new File(filePath);
             in = new FileInputStream(file);
             bfIn = new BufferedInputStream(in);
             // 图片
-//            response.setContentType("image/jpeg");
+            response.setContentType("image/jpeg");
             // pdf文件
-            response.setContentType("application/pdf");
+//            response.setContentType("application/pdf");
             response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filePath.substring(0, filePath.lastIndexOf(".")), "utf-8") + filePath.substring(filePath.lastIndexOf(".")));
             outputStream = response.getOutputStream();
             byte[] buff = new byte[1024];

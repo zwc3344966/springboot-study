@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 /**
  * @author: zhangwch
@@ -14,6 +16,9 @@ import java.io.*;
 
 @RestController
 public class UploadController {
+
+    public static void main(String[] args) {
+    }
 
     /**
      * 多个文件上传处理（保存路径为当前项目下）

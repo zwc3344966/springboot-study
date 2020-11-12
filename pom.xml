@@ -36,6 +36,13 @@
 			</exclusions>
 		</dependency>
 
+		<!-- 真正的启动类(JarLauncher) -->
+		<!--<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-loader</artifactId>
+			<scope>provided</scope>
+		</dependency>-->
+
 		<!--热部署启动器-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
